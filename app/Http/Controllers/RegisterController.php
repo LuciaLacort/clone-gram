@@ -36,23 +36,21 @@ class RegisterController extends Controller
         ]);
 
         //Crear un registro en la base de datos
-        User::create([
+        $user = User::create([
             'name'=> $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
-            //Autenticar usuario 
-            Auth::attempt([
+
+        //Autenticar usuario 
+        Auth::attempt([
             'email' => $request->email, 
             'password' => $request->password
         ]);
 
-        //Otra forma de autenticar usuario
-        // auth()->attempt($request->only('email', 'password'));
-
         //Redireccionar al usuario
-         return redirect()->route('posts.index');
+        return redirect()->route('posts.index', ['user' => $user->username]);
     }
 }
 

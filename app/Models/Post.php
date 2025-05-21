@@ -16,7 +16,7 @@ class Post extends Model
         'image',
         'user_id'
     ];
-//Los postst perteneces a un usuario y cuando se recupera el usuario se recuperan solo los campos name y username para optimizar la llamada a la base de datos
+//Los postst pertenecen a un usuario y cuando se recupera el usuario se recuperan solo los campos name y username para optimizar la llamada a la base de datos
     public function user()
     {
         return $this->belongsTo(User::class)->select(['name', 'username']);
